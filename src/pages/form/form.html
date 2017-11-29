@@ -1,0 +1,89 @@
+<!--
+  Generated template for the EditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title_form}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+ <!-- <section class="sample-app-content">
+    <div class="container">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label>Nom :</label>
+          <input type="text" class="form-control" formControlName="name" placeholder="Nom">
+        </div>
+        <div class="form-group">
+          <label>Description :</label>
+          <input type="text" class="form-control" formControlName="description"  placeholder="Description">
+        </div>
+        <div class="form-group">
+          <label>Prix :</label>
+          <input type="number" class="form-control" formControlName="price" id="prix" placeholder="Prix">
+        </div>
+        <div class="form-group">
+          <label for="filePicker">Image :</label><br>
+          <button class="btn btn-default"><input type="file"  id="filePicker" (change)="handleFileSelect($event)"></button>
+          <textarea id="base64textarea" class="hidden" formControlName="image" placeholder="Base64 will appear here" cols="50" rows="15">pat</textarea>
+        </div>
+      </form>
+      <div class="form-group">
+        <label>Ingrédients :</label>
+        <button type="button" class="btn btn-info" (click)="addIngredient()">+</button>
+        <ng-container *ngFor="let ingredient of ingredients">
+
+          <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="ingredient.name">
+          <input type="text" class="form-control" placeholder="Grammage" [(ngModel)]="ingredient.weight">
+          <input type="text" class="form-control" placeholder="Prix" [(ngModel)]="ingredient.price">
+        </ng-container>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="onSubmit()">Ajouter</button>
+      <button type="button" class="btn btn-primary" (click)="showSuccess()">tester</button>
+    </div>
+  </section>
+-->
+
+  <ng-template #form_content>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(); ">
+
+      <p class="text-center ">
+        <img *ngIf="pizza && pizza.image" class="img-responsive center-block" src="data:image/png;base64,{{pizza.image}}">
+        <label for="filePicker">Modifier l'image:</label><br>
+        <input class="center-block" type="file" id="filePicker" (change)="handleFileSelect($event)">
+      </p>
+      <p>
+        <ion-item>
+          <ion-label floating>Nom</ion-label>
+          <ion-input type="text" formControlName="name"></ion-input>
+        </ion-item>
+
+      </p>
+      <p>
+        <ion-item>
+          <ion-label floating>Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+
+      </p>
+      <p>
+        <ion-item>
+          <ion-label floating>Prix (€)</ion-label>
+          <ion-input type="number" formControlName="price"></ion-input>
+        </ion-item>
+      </p>
+      <p>
+        <button type="submit" [disabled]="!form.valid" ion-button block>Enregistrer</button>
+      </p>
+    </form>
+  </ng-template>
+
+</ion-content>

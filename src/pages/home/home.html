@@ -1,18 +1,60 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <button [navPush]="FormPage" [navParams]="pizza" ion-button icon-left clear small>
+        <ion-icon name="add"></ion-icon>
+        <div>Ajouter une pizza</div>
+    </button>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <h3>Pizzas disponibles :</h3>
+
+    <div *ngIf="listPizza">
+    <ion-card *ngFor="let pizza of listPizza">
+
+        <ion-item>
+            <h2>{{ pizza.name }}</h2>
+            <p>Créée le {{ pizza.created_at|date }}</p>
+        </ion-item>
+
+        <img src="data:image/png;base64,{{pizza.image}}">
+
+        <ion-card-content>
+            <p>{{pizza.description}}</p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col>
+                <button [navPush]="pizzaDetailPage" [navParams]="pizza" ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>DETAIL</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button [navPush]="pizzaFormPage" [navParams]="pizza" ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>EDIT</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button (click)="onDelete(pizza._id)" ion-button icon-left clear small>
+                    <ion-icon name="trash"></ion-icon>
+                    <div>DELETE</div>
+                </button>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
+    </div>
 </ion-content>
+
+
+
+
